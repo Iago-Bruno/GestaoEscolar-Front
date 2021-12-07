@@ -1,12 +1,13 @@
 import React from 'react';
+
 import './App.css';
 
-import { RegisterPage } from './pages/RegisterPage';
+import { Rotas } from './routes';
 
 function App() {
   return (
     <div className="App">
-      <RegisterPage />
+      <Rotas />
     </div>
   );
 }
