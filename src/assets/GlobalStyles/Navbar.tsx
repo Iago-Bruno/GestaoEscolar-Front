@@ -5,27 +5,31 @@ import UserImg from '../User.png';
 
 import './Navbar.css';
 
-import Icone from '../../assets/Icone.png';
+import IconDM from '../IconDM.png';
 
 export function Navbar() {
     const navigate = useNavigate();
 
-    async function handleHome() {
+    async function handleScore() {
         await navigate('/score');
+    }
+
+    async function handleProfile() {
+        await navigate('/profile');
     }
 
     return(
         <nav className="navbar">
             <div className="nav-left">
-                <img src={Icone} alt="Icone" />
+                <img src={IconDM} alt="Icone" />
 
                 <div className="nav-options light">
                     <h2>Horários</h2>
                 </div>
-                <div className="nav-options black" onClick={handleHome}>
+                <div className="nav-options black" onClick={handleScore}>
                     <h2>Notas</h2>
                 </div>
-                <div className="nav-options light">
+                <div className="nav-options light" onClick={handleProfile}>
                     <h2>Perfil</h2>
                 </div>
             </div>
