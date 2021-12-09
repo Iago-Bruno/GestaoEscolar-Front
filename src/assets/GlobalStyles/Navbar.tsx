@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import UserImg from '../User.png';
@@ -6,9 +6,15 @@ import UserImg from '../User.png';
 import './Navbar.css';
 
 import IconDM from '../IconDM.png';
+import { UserAuth } from '../../types/types';
 
 export function Navbar() {
     const navigate = useNavigate();
+    const [userAuth] = useState<UserAuth | null>(
+        JSON.parse(sessionStorage.getItem("auth") || '')
+    );
+
+    console.log(userAuth?.type);
 
     async function handleScore() {
         await navigate('/score');

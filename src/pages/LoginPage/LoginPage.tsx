@@ -17,17 +17,17 @@ export function LoginPage() {
     const [password, setPassword] = useState<string>('');
 
     async function handleLogin(event: FormEvent) {
-        // event.preventDefault();
+        event.preventDefault();
 
-        // await api.post(
-        //     'login',
-        //     {
-        //         email,
-        //         password
-        //     }
-        // );
+        const response = await api.post(
+            'login',
+            {
+                email,
+                password
+            }
+        );
 
-        // alert("Logado com sucesso");
+        sessionStorage.setItem("auth", JSON.stringify(response.data));
 
         await navigate('/home');
     }
