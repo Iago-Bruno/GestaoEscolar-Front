@@ -2,3 +2,38 @@
     width: 100%;
     height: 100%;
 }
+
+.home-page .home {
+    width: 100%;
+    height: 88%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.home-page .home img {
+    background: transparent;
+    width: 600px;
+    height: 500px;
+}
+
+.home-page .home .home-content {
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: start;
+    text-align: left;
+}
+
+.home-page .home .home-content h2 {
+    color: #fd1515;
+    margin: 0;
+    font-size: 40px;
+}
+
+.home-page .home .home-content h4 {
+    color: rgb(225, 115, 92);
+    margin-top: 10px;
+    font-size: 16px;
+}

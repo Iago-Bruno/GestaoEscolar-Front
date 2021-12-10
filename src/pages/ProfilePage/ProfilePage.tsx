@@ -26,18 +26,6 @@ export function ProfilePage() {
                             <h4>Iago</h4>
                         </div>
                     </div>
-                    <div className="user-option">
-                        <label>Tipo*</label>
-                        <div className="option">
-                            <h4>Aluno</h4>
-                        </div>
-                    </div>
-                    <div className="user-option">
-                        <label>Número de Registro</label>
-                        <div className="option">
-                            <h4>123123123</h4>
-                        </div>
-                    </div>
                </div>
            </div>
         </div>
