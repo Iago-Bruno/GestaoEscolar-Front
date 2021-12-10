@@ -19,7 +19,7 @@ export function Rotas() {
                 <Route path="score" element={<ScorePage />} />
                 <Route path="profile" element={<ProfilePage />} />
                 <Route path="classes" element={<ClassesPage />} />
-                <Route path="class" element={<ClassPage />} />
+                <Route path="class/:id" element={<ClassPage />} />
             </Routes>
         </BrowserRouter>
     );

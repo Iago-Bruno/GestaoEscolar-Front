@@ -1,10 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './ScorePage.css';
 
 import { Navbar } from '../../assets/GlobalStyles/Navbar';
+import { ClassAttributes, ScoreAttributes, UserAttributes, UserAuth } from '../../types/types';
+import api from '../../services/api';
+
+interface InfoUserAttributes {
+    user: UserAttributes;
+    userClass: ClassAttributes;
+    scoresSerialized: {
+        score: ScoreAttributes,
+        teacher: UserAttributes,
+    }[];
+}
 
 export function ScorePage() {
+    const [infoUser, setInfoUser] = useState<InfoUserAttributes>();
+    const [userAuth] = useState<UserAuth | null>(
+        JSON.parse(sessionStorage.getItem("auth") || '')
+    );
+
+    function averageScores(score: ScoreAttributes){
+        let sum = 0;
+
+        if (score.first_bimester) sum += score.first_bimester;
+        if (score.second_bimester) sum += score.second_bimester;
+        if (score.third_bimester) sum += score.third_bimester;
+        if (score.fourth_bimester) sum += score.fourth_bimester;
+
+        if (sum > 0) return sum / 4;
+        
+        return sum;
+    }
+
+    useEffect(() => {
+        api.get(`users/list-scores/${userAuth?.user_id}`).then((response) => {
+            console.log(response.data);
+            setInfoUser(response.data);
+        })
+    }, []);
+
     return(
         <div className="score-page">
             <Navbar />
@@ -19,9 +55,13 @@ export function ScorePage() {
                         <th colSpan={9} style={{fontSize: "16px"}}>Pontuação de Notas</th>
                     </tr>
                     <tr>
-                        <th colSpan={5} style={{fontSize: "16px"}}>Aluno: Iago Bruno</th>
-                        <th colSpan={3} style={{fontSize: "16px"}}>Turma: Informática A</th>
-                        <th colSpan={1} style={{fontSize: "16px"}}>Ano: 3° Série</th>
+                        <th colSpan={5} style={{fontSize: "16px"}}>
+                            Aluno: {infoUser?.user.name}
+                        </th>
+                        <th colSpan={3} style={{fontSize: "16px"}}>
+                            Turma: {`${infoUser?.userClass.name} ${infoUser?.userClass.code}`}
+                        </th>
+                        <th colSpan={1} style={{fontSize: "16px"}}>Ano: {infoUser?.userClass.year}</th>
                     </tr>
                     <tr>
                         <th colSpan={2}>Matéria</th>
@@ -34,60 +74,19 @@ export function ScorePage() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td colSpan={2}>Matemática</td>
-                        <td colSpan={2}>Lanne</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td colSpan={2}>Biologia</td>
-                        <td colSpan={2}>Rafael</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td colSpan={2}>Português</td>
-                        <td colSpan={2}>Amanda</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td colSpan={2}>História</td>
-                        <td colSpan={2}>Adrianna</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td colSpan={2}>Artes</td>
-                        <td colSpan={2}>Cida</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td colSpan={2}>Inglês</td>
-                        <td colSpan={2}>Klecio</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                        <td>10</td>
-                    </tr>
+                    {infoUser?.scoresSerialized.map((scoreSerialized) => {
+                        return (
+                            <tr>
+                                <td colSpan={2}>{scoreSerialized.score.matter}</td>
+                                <td colSpan={2}>{scoreSerialized.teacher.name}</td>
+                                <td>{scoreSerialized.score.first_bimester}</td>
+                                <td>{scoreSerialized.score.second_bimester}</td>
+                                <td>{scoreSerialized.score.third_bimester}</td>
+                                <td>{scoreSerialized.score.fourth_bimester}</td>
+                                <td>{averageScores(scoreSerialized.score)}</td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </table>
         </div>

@@ -1,102 +1,64 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
 import { Navbar } from '../../assets/GlobalStyles/Navbar';
 
 import { HiOutlineDesktopComputer } from 'react-icons/hi';
 import { FaDna } from 'react-icons/fa';
 import { RiPlantFill } from 'react-icons/ri';
+import { ClassAttributes, UserAuth } from '../../types/types';
 
 import './ClassesPage.css';
+import api from '../../services/api';
+import { Link } from 'react-router-dom';
 
 export function ClassesPage() {
-    const navigate = useNavigate();
+    const [classes, setClasses] = useState<ClassAttributes[]>([]);
+    const [userAuth] = useState<UserAuth | null>(
+        JSON.parse(sessionStorage.getItem("auth") || '')
+    );
 
-    async function handleClass() {
-        await navigate('/class');
-    }
+    // async function handleClass() {
+    //     await navigate('/class', { state: { teacher: userAuth?.user_id }});
+    // }
+
+    useEffect(() => {
+        api.get(`/users/list-teacher-classes/${userAuth?.user_id}`).then(response => {
+            setClasses(response.data);
+        });
+    }, []);
 
     return(
         <div className="classes-page">
             <Navbar />
             <div className="classes-box">
-                <div className='classes' onClick={handleClass}>
-                    <div className='class-header'>
-                        <h2>1º Informática "A"</h2>
-                        <HiOutlineDesktopComputer />
-                    </div>
-                    <div className='class-body'>
-                        <h3>Curso: Informática</h3>
-                        <h3>Turma: A</h3>
-                        <h3>Ano: 1°</h3>
-                    </div>
-                </div>
-                <div className='classes' onClick={handleClass} >
-                    <div className='class-header'>
-                        <h2>2º Informática "A"</h2>
-                        <HiOutlineDesktopComputer />
-                    </div>
-                    <div className='class-body'>
-                        <h3>Curso: Informática</h3>
-                        <h3>Turma: A</h3>
-                        <h3>Ano: 2°</h3>
-                    </div>
-                </div>
-                <div className='classes' onClick={handleClass} >
-                    <div className='class-header'>
-                        <h2>3º Informática "A"</h2>
-                        <HiOutlineDesktopComputer />
-                    </div>
-                    <div className='class-body'>
-                        <h3>Curso: Informática</h3>
-                        <h3>Turma: A</h3>
-                        <h3>Ano: 3°</h3>
-                    </div>
-                </div>
-                <div className='classes' onClick={handleClass} >
-                    <div className='class-header'>
-                        <h2>1º Análises "A"</h2>
-                        <FaDna />
-                    </div>
-                    <div className='class-body'>
-                        <h3>Curso: Análises</h3>
-                        <h3>Turma: A</h3>
-                        <h3>Ano: 1°</h3>
-                    </div>
-                </div>
-                <div className='classes' onClick={handleClass} >
-                    <div className='class-header'>
-                        <h2>2º Análises "A"</h2>
-                        <FaDna />
-                    </div>
-                    <div className='class-body'>
-                        <h3>Curso: Análises</h3>
-                        <h3>Turma: A</h3>
-                        <h3>Ano: 2°</h3>
-                    </div>
-                </div>
-                <div className='classes' onClick={handleClass} >
-                    <div className='class-header'>
-                        <h2>3º Análises "A"</h2>
-                        <FaDna />
-                    </div>
-                    <div className='class-body'>
-                        <h3>Curso: Análises</h3>
-                        <h3>Turma: A</h3>
-                        <h3>Ano: 3°</h3>
-                    </div>
-                </div>
-                <div className='classes' onClick={handleClass} >
-                    <div className='class-header'>
-                        <h2>1º Agroecologia "A"</h2>
-                        <RiPlantFill />
-                    </div>
-                    <div className='class-body'>
-                        <h3>Curso: Agroecologia</h3>
-                        <h3>Turma: A</h3>
-                        <h3>Ano: 1°</h3>
-                    </div>
-                </div>
+                {classes.map((oneClass: ClassAttributes) => {
+                    return (
+                        <div className='classes'>
+                            <Link className='link' to={`/class/${oneClass.id}`}>
+                                <div className='class-header'>
+                                    <h2>
+                                        {`${oneClass.name} ${oneClass.code}`}
+                                    </h2>
+                                    {oneClass.name == 'Informática' && (
+                                        <HiOutlineDesktopComputer />
+                                    )}
+                                    {oneClass.name == 'Análises' && (
+                                        <FaDna />
+                                    )}
+                                    {oneClass.name == 'Agroecologia' && (
+                                        <RiPlantFill />
+                                    )}
+                                </div>
+                                <div className='class-body'>
+                                    <h3>Curso: {oneClass.name}</h3>
+                                    <h3>Turma: {oneClass.code}</h3>
+                                    <h3>Ano: {oneClass.year}</h3>
+                                </div>
+                            </Link>
+                        </div>
+                    );
+                })}
+                
             </div>
         </div>
     );
