@@ -36,19 +36,13 @@ export function ScorePage() {
 
     useEffect(() => {
         api.get(`users/list-scores/${userAuth?.user_id}`).then((response) => {
-            console.log(response.data);
             setInfoUser(response.data);
         })
-    }, []);
+    }, [userAuth]);
 
     return(
         <div className="score-page">
             <Navbar />
-            {/* <div className="score-head">
-                <h3>Aluno: Iago Bruno</h3>
-                <h3>Turma: Informática A</h3>
-                <h3>Ano: 3° Série</h3>
-            </div> */}
             <table>
                 <thead>
                     <tr>

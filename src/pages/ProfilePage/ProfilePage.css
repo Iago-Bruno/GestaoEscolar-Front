@@ -8,7 +8,7 @@
 }
 
 .profile-page .profile {
-    background-color: whitesmoke;
+    background-color: rgb(235 235 235);
     border-left: 2px solid rgb(168, 164, 164);
     border-right: 2px solid rgb(168, 164, 164);
     width: 50%;
@@ -41,12 +41,23 @@
     border: 1px solid gray;
     height: 40px;
     margin: 4px 0 0 0;
-    background-color: cyan;
+    background-color: rgb(255, 255, 255);
     display: flex;
     align-items: center;
 }
 
+.profile-page .profile .profile-box .user-option .option input {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border: 0;
+    padding-left: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
 .profile-page .profile .profile-box .user-option .option h4 {
     margin: 0 8px;
-    font-size: 18px;
+    font-size: 14px;
+    font-weight: normal;
 }
