@@ -7,6 +7,7 @@ import { HomePage } from './pages/HomePage/HomePage';
 import { ScorePage } from './pages/ScorePage/ScorePage';
 import { ProfilePage } from './pages/ProfilePage/ProfilePage';
 import { ClassesPage } from './pages/ClassesPage/ClassesPage';
+import { ClassPage } from './pages/ClassPage/ClassPage';
 
 export function Rotas() {
     return(
@@ -18,6 +19,7 @@ export function Rotas() {
                 <Route path="score" element={<ScorePage />} />
                 <Route path="profile" element={<ProfilePage />} />
                 <Route path="classes" element={<ClassesPage />} />
+                <Route path="class" element={<ClassPage />} />
             </Routes>
         </BrowserRouter>
     );

@@ -14,7 +14,9 @@ export function Navbar() {
         JSON.parse(sessionStorage.getItem("auth") || '')
     );
 
-    console.log(userAuth?.type);
+    async function handleClasses() {
+        await navigate('/classes');
+    }
 
     async function handleScore() {
         await navigate('/score');
@@ -32,9 +34,15 @@ export function Navbar() {
                 <div className="nav-options light">
                     <h2>Horários</h2>
                 </div>
-                <div className="nav-options black" onClick={handleScore}>
-                    <h2>Notas</h2>
-                </div>
+                {userAuth?.type === "professor" ?
+                    <div className="nav-options black" onClick={handleClasses}>
+                        <h2>Turmas</h2>
+                    </div>
+                : 
+                    <div className="nav-options black" onClick={handleScore}>
+                        <h2>Notas</h2>
+                    </div>
+                }
                 <div className="nav-options light" onClick={handleProfile}>
                     <h2>Perfil</h2>
                 </div>

@@ -1,0 +1,79 @@
+.classes-page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+.classes-page .classes-box {
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border-left: 2px solid rgb(168, 164, 164);
+    border-right: 2px solid rgb(168, 164, 164);
+    justify-items: center;
+    background-color: rgb(235 235 235);
+}
+
+.classes-page .classes-box .classes {
+    box-shadow: 0px 6px 4px rgb(0, 0, 0, 0.4);
+    cursor: pointer;
+    background-color: rgb(235, 173, 173, 0.4) ;
+    width: 280px;
+    border: 1px solid rgb(120 43 43);
+    border-radius: 6px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+    overflow: hidden;
+    margin-top: 60px;
+}
+
+.classes-page .classes-box .classes:hover {
+    background-color: rgba(206, 147, 147, 0.4) ;
+}
+
+.classes-page .classes-box .classes:hover .class-header {
+    background-color: rgb(238, 220, 220);
+}
+
+.classes-page .classes-box .classes .class-header {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 40px;
+    color: #FF0000;
+    background-color: rgb(255, 255, 255);
+}
+
+.classes-page .classes-box .classes .class-header svg {
+    width: 24px;
+    height: 24px;
+    margin-right: 6px;
+}
+
+.classes-page .classes-box .classes .class-header h2 {
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.classes-page .classes-box .classes .class-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    color: rgb(120 43 43);
+    width: 100%;
+    height: 100%;
+}
+
+.classes-page .classes-box .classes .class-body h3 {
+    margin: 10px 0 6px 10px;
+    font-size: 15px;
+}

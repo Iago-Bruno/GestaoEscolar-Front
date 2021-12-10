@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .score-page .score-head {
@@ -12,20 +13,36 @@
 }
 
 .score-page .score-head h3 {
-    padding: 0 6rem;
+    color: #FF0000;
+    padding: 0 3rem;
+    font-size: 18px;
 }
 
 .score-page table {
+    color: rgb(120 43 43);
+    background-color: rgb(235, 173, 173, 0.4);
     width: 70%;
-    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    border: 2px solid black;
-    border-spacing: 0;
-    border-collapse: collapse;
+    border-radius: 10px;
+    margin: 50px;
 }
 
-.score-page table th,
-.score-page table td {
+.score-page table thead {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.score-page table tbody th,
+.score-page table tbody td {
+    border-radius: 5px;
     padding: 6px;
-    border: 2px solid black;
+    padding-bottom: 8px;
+    border: 1px solid rgb(120 43 43);
+}
+
+.score-page table thead tr td,
+.score-page table thead tr th{
+    padding: 6px;
+    padding-bottom: 8px;
+    border: 1px solid rgb(120 43 43);
 }
