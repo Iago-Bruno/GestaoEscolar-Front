@@ -83,9 +83,9 @@
 
 .login-page .login-form .user-form .form-input svg {
     width: 25px;
+    margin-right: -30px;
     height: 25px;
     margin-left: 5px;
-    position: absolute;
     opacity: 50%;
 }
 
@@ -104,6 +104,10 @@
 .login-page .login-form .user-form .form-input input::placeholder {
     font-family: 'Arya', sans-serif;
     font-size: 18px;
+}
+
+.login-page .login-form .user-form .form-input .eye-icon {
+    margin-left: -30px;
 }
 
 .login-page .login-form .user-form .form-button {

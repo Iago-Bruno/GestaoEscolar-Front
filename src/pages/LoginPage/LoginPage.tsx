@@ -5,6 +5,8 @@ import api from '../../services/api';
 
 import { AiOutlineMail } from 'react-icons/ai';
 import { MdLockOutline } from 'react-icons/md';
+import { GrFormView } from 'react-icons/gr';
+import { GrFormViewHide } from 'react-icons/gr';
 
 import iconDm from '../../assets/IconDM.png';
 
@@ -13,8 +15,14 @@ import './LoginPage.css';
 export function LoginPage() {
     let navigate = useNavigate();
 
+    const [eyehide, setEyeHide] = useState<boolean>(true);
+
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+
+    function changeView() {
+        setEyeHide(!eyehide);
+    }
 
     async function handleLogin(event: FormEvent) {
         event.preventDefault();
@@ -52,16 +60,26 @@ export function LoginPage() {
                             className="input" 
                             type="text"
                             onChange={e => setEmail(e.target.value)}
+                            required
                         />
                     </div>
                     <div className="form-input">
-                        <MdLockOutline className="icon" />
-                        <input 
-                            placeholder="Senha" 
-                            className="input" 
-                            type="text"
-                            onChange={e => setPassword(e.target.value)} 
-                        />
+                        <div style={{width: "100%", height:"100%", display: "flex", alignItems: "center"}}>
+                            <MdLockOutline />
+                            <input 
+                                placeholder="Senha" 
+                                className="input" 
+                                type={eyehide ? "password" : "text"}
+                                onChange={e => setPassword(e.target.value)} 
+                                required
+                            />
+                        </div>
+                        
+                        {eyehide ? 
+                            <GrFormViewHide className='eye-icon' onClick={changeView} />
+                        : 
+                            <GrFormView className='eye-icon' onClick={changeView} />
+                        }
                     </div>
 
                     <button className="form-button">Entrar</button>
